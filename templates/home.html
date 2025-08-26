@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Welcome to My Todo App{% endblock %}
+
+{% block content %}
+<div class="row align-items-center justify-content-center g-3 py-5"> 
+    <div class="col-md-5 order-md-2"> 
+        <div class="text-center">
+            <img src="{% static "images/todoimg.jpg" %}" class="img-fluid rounded shadow-lg w-75 mx-auto d-block" alt="Organize your tasks with Todo App"> 
+        </div>
+    </div>
+
+    <div class="col-md-7 order-md-1">
+        <h1 class="display-6 fw-bold mb-3 text-primary">Organize Your Life, One Todo at a Time.</h1> 
+        <p class="fs-5 mb-3"> 
+            Welcome to the Todo App, your personal assistant for managing tasks. We respect your work and
+            are here to help you keep track of everything important.
+        </p>
+        <p class="fs-5 mb-4"> 
+            Register now to add your todos, and we'll make sure to remind you of your tasks at just the right moment.
+            Never miss a deadline or forget an important chore again!
+        </p>
+        
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
+            <a href="{% url "login" %}" class="btn btn-primary btn-lg px-4 me-md-2">Login</a>
+            <a href="{% url "registration" %}" class="btn btn-outline-secondary btn-lg px-4">Register</a>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 text-center">
+    <div class="col-12">
+        <h3 class="h4 text-muted">Start organizing your tasks today!</h3> 
+    </div>
+</div>
+{% endblock %}
