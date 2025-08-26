@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My Todos
+{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    {% if user.is_authenticated %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2">My Todo List</h1>
+        <a href="{% url "todo_add" %}" class="btn btn-primary btn-lg rounded-circle shadow-sm" style="width: 50px; height: 50px; font-size: 1.5rem; line-height: 1.25;">
+            +
+        </a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-md-3 row-cols-lg-4 g-4">
+        {% for todo in todos %}
+        {% if todo.user == user %}
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body bg-white text-dark">
+              <h5 class="card-title fw-bold fs-5">{{ todo.todo_name }}</h5>
+              <p class="card-text small mt-2 mb-3 text">{{ todo.todo_text }}</p>
+              
+              {% if todo.remind_date and todo.remind_time %}
+              <div class="mb-3">
+                            <h6 class="card-subtitle  small fw-normal">Remind at:</h6>
+                            <p class="card-subtitle small fw-semibold">{{ todo.remind_date }} &bull; {{ todo.remind_time }}</p>
+                          </div>
+                          {% endif %}
+                          
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url "edit_todo" todo.id %}" class="card-link text-secondary text-decoration-none small fw-bold">Edit</a>
+                            <a href="{% url "delete_todo" todo.id %}" class="card-link text-danger text-decoration-none small fw-bold">Delete</a>
+                          </div>
+                    </div>
+                </div>
+              </div>
+              {% endif %}
+          {% endfor %}
+      </div>
+
+    {% else %}
+
+    <div class="row align-items-center justify-content-center g-3 py-5">
+        <div class="col-md-5 order-md-2">
+            <div class="text-center">
+                <img src="{% static "images/todoimg.jpg" %}" class="img-fluid rounded shadow-lg w-75 mx-auto d-block" alt="Organize your tasks with Todo App">
+            </div>
+        </div>
+
+        <div class="col-md-7 order-md-1">
+            <h1 class="display-6 fw-bold mb-3 text-primary">Organize Your Life, One Todo at a Time.</h1>
+            <p class="fs-5 mb-3">Welcome to the Todo App, your personal assistant for managing tasks. We respect your work and are here to help you keep track of everything important.</p>
+            <p class="fs-5 mb-4">Register now to add your todos, and we'll make sure to remind you of your tasks at just the right moment. Never miss a deadline or forget an important chore again!</p>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{% url "login" %}" class="btn btn-primary btn-lg px-4 me-md-2">Login</a>
+                <a href="{% url "registration" %}" class="btn btn-outline-secondary btn-lg px-4">Register</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
+

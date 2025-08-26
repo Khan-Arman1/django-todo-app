@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Todo
+{% endblock %}
+
+{% block content %}
+<section class="container-fluid align-middle">
+    <h2>Add a new todo</h2>
+    <form method="post" class="col-md-6 mx-auto border border-1 rounded p-3">
+        {% csrf_token %}
+        {{form.as_p}}
+        <br> 
+        <button type="submit" class="container-fluid btn btn-secondary">Add</button>
+    </form>
+</section>
+
+{% endblock %}

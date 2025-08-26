@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search Page
+{% endblock %}
+
+{% block content %}
+<section>
+<h1>Search Page</h1>
+{% if todos %}
+<div class="container row gap-4 ">
+{% for todo in todos %}
+
+{% if todo.user == user %}
+
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body bg-white text-dark">
+                        <h5 class="card-title fw-bold fs-5">{{ todo.todo_name }}</h5>
+                        <p class="card-text small mt-2 mb-3 text">{{ todo.todo_text }}</p>
+                        
+                        {% if todo.remind_date and todo.remind_time %}
+                        <div class="mb-3">
+                            <h6 class="card-subtitle  small fw-normal">Remind at:</h6>
+                            <p class="card-subtitle small fw-semibold">{{ todo.remind_date }} &bull; {{ todo.remind_time }}</p>
+                        </div>
+                        {% endif %}
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url "edit_todo" todo.id %}" class="card-link text-secondary text-decoration-none small fw-bold">Edit</a>
+                            <a href="{% url "delete_todo" todo.id %}" class="card-link text-danger text-decoration-none small fw-bold">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+  {% endif %}
+  
+  {% endfor %}
+</div>
+  
+  {% endif %}
+</section>
+{% endblock %}
